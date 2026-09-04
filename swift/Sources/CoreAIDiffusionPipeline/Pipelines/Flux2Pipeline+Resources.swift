@@ -115,9 +115,9 @@ extension Flux2Pipeline {
         }
 
         let textEncoder = CoreAIDiffusionModelFunction(
-            modelURL: url.appendingPathComponent(textEncoderPath))
+            modelURL: ModelBundle.resolveAssetURL(textEncoderPath, in: url))
         let decoder = CoreAIDiffusionModelFunction(
-            modelURL: url.appendingPathComponent(decoderName))
+            modelURL: ModelBundle.resolveAssetURL(decoderName, in: url))
 
         // Encoder for img2img (optional)
         let encoderName: String?

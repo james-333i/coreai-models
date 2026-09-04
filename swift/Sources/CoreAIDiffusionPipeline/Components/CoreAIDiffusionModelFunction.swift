@@ -27,7 +27,9 @@ public actor CoreAIDiffusionModelFunction {
         guard !isLoaded else { return }
 
         let options = SpecializationOptions(preferredComputeUnitKind: .gpu)
+        print("CoreAIDiffusion - loading \(modelURL.lastPathComponent) with GPU specialization")
         let loadedModel = try await AIModel(contentsOf: modelURL, options: options)
+        print("CoreAIDiffusion - loaded \(modelURL.lastPathComponent)")
         guard let fn = try loadedModel.loadFunction(named: "main") else {
             throw CoreAIDiffusionError.functionNotFound("main", modelURL)
         }
