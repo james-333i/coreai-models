@@ -131,7 +131,10 @@ extension Flux2Pipeline {
         }
         let encoder: CoreAIDiffusionModelFunction?
         if let name = encoderName {
-            encoder = CoreAIDiffusionModelFunction(modelURL: url.appendingPathComponent(name))
+            let encoderURL = ModelBundle.resolveAssetURL(name, in: url)
+            encoder = FileManager.default.fileExists(atPath: encoderURL.path)
+                ? CoreAIDiffusionModelFunction(modelURL: encoderURL)
+                : nil
         } else {
             encoder = nil
         }
